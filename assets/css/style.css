@@ -127,6 +127,9 @@ body, html {
     position: absolute;
     transition: transform 0.2s;
     cursor: pointer;
+    background-color: #f0f0f0;
+    transition: transform 0.2s, opacity 0.3s ease-in; 
+    opacity: 0; 
 }
 
 .image-container img:hover {
