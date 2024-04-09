@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Ensures padding and border are included in the element's dimensions */
+    box-sizing: border-box;
 }
 
 @font-face { 
@@ -37,7 +37,7 @@ body, html {
     display: flex;
     justify-content: space-between;
     padding: 50px 0 0 20px;
-    font-family: 'GoogleSansbold', sans-serif; /* Corrected font-family name */
+   
 }
 
 .header a{
@@ -62,9 +62,9 @@ body, html {
 
 .filter {
     display: flex;
-    justify-content: flex-start; /* Aligns items to the start */
-    gap: 10px; /* Adjust the gap as needed for spacing between elements */
-    padding: 80px 0 0 20px; /* Adjust padding as needed */
+    justify-content: flex-start; 
+    gap: 10px; 
+    padding: 80px 0 0 20px; 
 }
 
 .filter select {
@@ -94,7 +94,7 @@ body, html {
 
 
 .filter select:last-child {
-    margin-right: 0; /* Ensure the last element doesn’t add extra space to the right */
+    margin-right: 0;
 }
 
 .filter #clearFilters {
