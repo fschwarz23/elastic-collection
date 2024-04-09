@@ -1,0 +1,216 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensures padding and border are included in the element's dimensions */
+}
+
+@font-face { 
+    font-family: "GoogleSans"; 
+    src: url("assets/fonts/GoogleSans.otf") format("opentype");
+    font-style: normal;
+ } 
+ 
+ @font-face { 
+    font-family: "GoogleSansItalic"; 
+    src: url("assets/fonts/GoogleSansItalic.otf") format("opentype"); 
+    font-style: normal;
+ } 
+
+  @font-face { 
+    font-family: "GoogleSansMedium"; 
+    src: url("assets/fonts/GoogleSansMedium.otf") format("opentype"); 
+    font-style: normal;
+ } 
+
+ @font-face { 
+    font-family: "GoogleSansBold"; 
+    src: url("assets/fonts/GoogleSansBold.otf") format("opentype"); 
+    
+ } 
+
+ 
+body, html {
+    padding: 0 25px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px 0 0 20px;
+    font-family: 'GoogleSansbold', sans-serif; /* Corrected font-family name */
+}
+
+.header a{
+    text-decoration: none;
+    color: black;
+}
+.title {
+    font-size: 26px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.sub-title {
+    font-size: 12px;
+    padding-right:20px;
+    align-self: flex-end; 
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.filter {
+    display: flex;
+    justify-content: flex-start; /* Aligns items to the start */
+    gap: 10px; /* Adjust the gap as needed for spacing between elements */
+    padding: 80px 0 0 20px; /* Adjust padding as needed */
+}
+
+.filter select {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #f0f0f0;
+    color: #7a7a7a;
+    border: none;
+    padding: 10px;
+    padding-right: 40px; 
+    border-radius: 5px;
+    outline: none;
+    background-image: url('data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 15L7 9H17L12 15Z\' fill=\'black\'/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center; 
+    background-size: 12px; 
+    -moz-appearance: none; 
+    text-indent: 1px; 
+    text-overflow: ""; 
+    width: 200px;
+  
+}
+
+
+.filter select:last-child {
+    margin-right: 0; /* Ensure the last element doesn’t add extra space to the right */
+}
+
+.filter #clearFilters {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    background-color: #f0f0f0;
+    color: #7a7a7a; 
+    border: none; 
+    padding: 10px 20px;
+    border-radius: 5px; 
+    cursor: pointer;
+    outline: none; 
+    font-size: 13px;
+}
+
+.filter #clearFilters:hover {
+    background-color: lightgrey;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 0;
+    margin-top:0;
+}
+
+.image-container img {
+    position: absolute;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.image-container img:hover {
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    body{
+        padding: 0;
+        margin: 0;
+    }
+    .filter {
+        flex-direction: column;
+        
+    }
+
+    .filter select,
+    .filter #clearFilters {
+        width: calc(100% - 10px);
+        margin: 0; 
+        box-sizing: border-box;
+       
+    }
+
+  
+
+
+}
+
+
+
+/*inner page*/
+
+.image-detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    gap: 20px;
+}
+
+.detail-image {
+    max-width: calc(100% - 100px);
+    max-height: calc(100vh - 200px);
+    margin: 0 auto;
+    border: 50px solid white;
+    box-sizing: border-box;
+}
+
+.image-info {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.info-block p {
+    margin: 5px 0;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 11px;
+    color: #9B9B9B;
+    text-align: left;
+}
+
+.image-hashtags {
+    font-size: 12px;
+    color: #666;
+    font-family: 'Roboto', sans-serif;
+}
+
+@media (max-width: 768px) {
+    .image-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .info-block {
+        text-align: center;
+    }
+
+    .detail-image {
+        max-width: calc(100% - 20px);
+        max-height: calc(100vh - 150px);
+    }
+}

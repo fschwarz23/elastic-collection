@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Details</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/script.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap">
+</head>
+<body>
+
+    <div class="header">
+        <div class="title"><a href="index.html"> Google, Search Landscapes</a></div>
+        <div class="sub-title">curated by Google Photos on Google Pixel 6</div>
+    </div>
+    
+<div class="image-detail-container">
+    <img src="../assets/images/your-image.jpg" alt="Landscape Image" class="detail-image">
+    <div class="image-info">
+        <div class="info-block">
+            <p>f stop: <span id="f-stop">2.8</span></p>
+            <p>lens: <span id="lens">24mm</span>, ISO: <span id="iso">100</span></p>
+        </div>
+        <div class="info-block">
+            <p>location: <span id="location">Yosemite National Park</span></p>
+            <p>latitude: <span id="latitude">37.8651° N</span></p>
+        </div>
+        <div class="info-block">
+            <p>date: <span id="date">2023-04-10</span></p>
+            <p>time: <span id="time">05:30 PM</span></p>
+        </div>
+    </div>
+    <p class="image-hashtags">#forest #2022 #Spring #Green</p>
+</div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const imageSrc = urlParams.get('image'); // Image filename from the query string
+        
+        // Example: Simulate fetching image details (adjust based on your data source)
+        const imageDetails = getImageDetails(imageSrc);
+    
+        // Update the image and its metadata on the page
+        updateImageDetails(imageDetails);
+    
+        // Generate and display hashtags
+        const hashtags = generateHashtags({
+            landscapeType: urlParams.get('landscapeType'),
+            year: urlParams.get('year'),
+            season: urlParams.get('season'),
+            color: urlParams.get('color')
+        });
+        document.querySelector('.image-hashtags').textContent = hashtags;
+    });
+    
+    function getImageDetails(imageSrc) {
+        // In a real scenario, fetch these details from your server or a local data structure
+        // For demonstration, using a static source path
+        return {
+            src: `assets/images/${imageSrc}`
+        };
+    }
+    
+    function updateImageDetails(details) {
+        document.querySelector('.detail-image').src = details.src;
+        // Additional metadata fields can be updated here if needed
+    }
+    
+    function generateHashtags({ landscapeType, year, season, color }) {
+        // Construct hashtags string from non-empty values
+        const tags = [landscapeType, year, season, color].filter(Boolean).map(tag => `#${tag}`);
+        return tags.join(' ');
+    }
+    </script>
+    
+</body>
+</html>

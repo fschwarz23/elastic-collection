@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Search of Landscapes</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/script.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="header">
+    <div class="title"><a href="index.html"> Hey Google, Search Landscapes</a></div>
+    <div class="sub-title">curated by Google Photos on Google Pixel 6</div>
+</div>
+
+<div class="filter">
+    <select id="landscapeType">
+        <option value="">Filter by Landscape Type</option>
+        <option value="agriculture">Agriculture</option>
+        <option value="architectural">Architectural</option>
+        <option value="cityscape">Cityscape</option>
+        <option value="coast">Coast</option>
+        <option value="desert">Desert</option>
+        <option value="farm">Farm</option>
+        <option value="forest">Forest</option>
+        <option value="lake">Lake</option>
+        <option value="mountain">Mountain</option>
+        <option value="river">River</option>
+        <option value="screenshots">Screenshots</option>
+        <option value="sea">Sea</option>
+        <option value="streetscenes">Street Scenes</option>
+        <option value="tropics">Tropics</option>
+        <option value="urban">Urban</option>
+    </select>
+    <select id="year">
+        <option value="">Filter by Year</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+    </select>
+
+    <select id="season">
+        <option value="">Filter by Weather</option>
+        <option value="cloudy">Cloudy</option>
+        <option value="fall">Fall</option>
+        <option value="fog">Fog</option>
+        <option value="rainy">Rainy</option>
+        <option value="snow">Snow</option>
+        <option value="spring">Spring</option>
+        <option value="summer">Summer</option>
+        <option value="Warm">Sunny</option>
+        <option value="winter">Winter</option>
+    </select>
+
+    <select id="color">
+        <option value="">Filter by Color</option>
+        <option value="bluesky">Blue Sky</option>
+        <option value="candlelight">Candlelight</option>
+        <option value="coolcolors"> Cool Colors</option>
+        <option value="daylightdirectsun">Daylight Direct Sun</option>
+        <option value="earthtones">Earth Tones</option>
+        <option value="incandescent">Incandescent</option>
+        <option value="monochrome">Monochrome</option>
+        <option value="neon">Neon</option>
+        <option value="neutral">Neutral</option>
+        <option value="pastel">Pastel</option>
+        <option value="vibrant">Vibrant</option>
+        <option value="warm">Warm</option>
+    </select>
+
+    <button id="clearFilters">Clear Filters</button>
+</div>
+
+<div id="imageContainer" class="image-container"></div>
+</body>
+</html>
