@@ -1,71 +1,69 @@
 const images = [
-    { src: 'landscape01.jpg', type: 'lake', year: '2020', season: 'summer', color: 'bluesky' },
-    { src: 'landscape02.jpg', type: 'farm', year: '2021', season: 'spring', color: 'warm' },
-    { src: 'landscape03.jpg', type: 'screenshot', year: '2021', season: 'winter', color: 'candlelight' },
-    { src: 'landscape04.jpg', type: 'farm', year: '2021', season: 'summer', color: 'bluesky' },
-    { src: 'landscape05.jpg', type: 'sea', year: '2021', season: 'summer', color: 'pastel' },
-    { src: 'landscape06.jpg', type: 'cityscape', year: '2022', season: 'summer', color: 'candlelight' },
-    { src: 'landscape07.jpg', type: 'forest', year: '2021', season: 'fall', color: 'incandescent' },
-    { src: 'landscape08.jpg', type: 'lake', year: '2023', season: 'fall', color: 'coolcolors' },
-    { src: 'landscape09.jpg', type: 'mountain', year: '2020', season: 'snow', color: 'monochrome' },
-    { src: 'landscape10.jpg', type: 'forest', year: '2020', season: 'winter', color: 'warm' },
-    { src: 'landscape11.jpg', type: 'mountain', year: '2021', season: 'spring', color: 'pastel' },
-    { src: 'landscape12.jpg', type: 'urban', year: '2021', season: 'cloudy', color: 'coolcolors' },
-    { src: 'landscape13.jpg', type: 'lake', year: '2023', season: 'summer', color: 'earthtones' },
-    { src: 'landscape14.jpg', type: 'tropics', year: '2022', season: 'summer', color: 'vibrant' },
-    { src: 'landscape15.jpg', type: 'sea', year: '2023', season: 'summer', color: 'bluesky' },
-    { src: 'landscape16.jpg', type: 'forest', year: '2023', season: 'rainy', color: 'coolcolors' },
-    { src: 'landscape17.jpg', type: 'forest', year: '2023', season: 'fall', color: 'vibrant' },
-    { src: 'landscape18.jpg', type: 'farm', year: '2022', season: 'summer', color: 'daylightdirectsun' },
-    { src: 'landscape19.jpg', type: 'architectural', year: '2021', season: 'winter', color: 'coolcolors' },
-    { src: 'landscape20.jpg', type: 'mountain', year: '2023', season: 'fog', color: 'coolcolors' },
-    { src: 'landscape21.jpg', type: 'urban', year: '2022', season: 'spring', color: 'incandescent' },
-    { src: 'landscape22.jpg', type: 'cityscape', year: '2023', season: 'fall', color: 'coolcolors' },
-    { src: 'landscape23.jpg', type: 'architectural', year: '2023', season: 'summer', color: 'bluesky' },
-    { src: 'landscape24.jpg', type: 'lake', year: '2023', season: 'summer', color: 'vibrant' },
-    { src: 'landscape25.jpg', type: 'cityscape', year: '2024', season: 'summer', color: 'warm' },
-    { src: 'landscape26.jpg', type: 'screenshot', year: '2024', season: 'spring', color: 'warm' },
-    { src: 'landscape27.jpg', type: 'lake', year: '2022', season: 'summer', color: 'bluesky' },
-    { src: 'landscape28.jpg', type: 'lake', year: '2023', season: 'summer', color: 'warm' },
-    { src: 'landscape29.jpg', type: 'mountain', year: '2023', season: 'fog', color: 'neutral' },
-    { src: 'landscape30.jpg', type: 'coast', year: '2023', season: 'spring', color: 'bluesky' },
-    { src: 'landscape31.jpg', type: 'lake', year: '2024', season: 'winter', color: 'coolcolors' },
-    { src: 'landscape32.jpg', type: 'forest', year: '2024', season: 'winter', color: 'monochrome' },
-    { src: 'landscape33.jpg', type: 'coast', year: '2023', season: 'summer', color: 'bluesky' },
-    { src: 'landscape34.jpg', type: 'coast', year: '2023', season: 'spring', color: 'warm' },
-    { src: 'landscape35.jpg', type: 'coast', year: '2023', season: 'summer', color: 'incandescent' },
-    { src: 'landscape36.jpg', type: 'architectural', year: '2023', season: 'spring', color: 'coolcolors' },
-    { src: 'landscape37.jpg', type: 'urban', year: '2024', season: 'fall', color: 'warm' },
-    { src: 'landscape38.jpg', type: 'architectural', year: '2024', season: 'spring', color: 'earthtones' },
-    { src: 'landscape39.jpg', type: 'farm', year: '2023', season: 'summer', color: 'warm' },
-    { src: 'landscape40.jpg', type: 'agriculture', year: '2020', season: 'summer', color: 'bluesky' },
-    { src: 'landscape41.jpg', type: 'forest', year: '2023', season: 'summer', color: 'daylightdirectsun' },
-    { src: 'landscape42.jpg', type: 'cityscape', year: '2024', season: 'spring', color: 'coolcolors' },
-    { src: 'landscape43.jpg', type: 'urban', year: '2024', season: 'spring', color: 'candlelight' },
-    { src: 'landscape44.jpg', type: 'streetscenes', year: '2024', season: 'rainy', color: 'monochrome' },
-    { src: 'landscape45.jpg', type: 'urban', year: '2024', season: 'winter', color: 'incandescent' },
-    { src: 'landscape46.jpg', type: 'screenshot', year: '2024', season: 'spring', color: 'monochrome' },
-    { src: 'landscape47.jpg', type: 'screenshot', year: '2024', season: 'spring', color: 'warm' },
-    { src: 'landscape48.jpg', type: 'screenshot', year: '2024', season: 'winter', color: 'coolcolors' },
-    { src: 'landscape49.jpg', type: 'screenshot', year: '2023', season: 'summer', color: 'daylightdirectsun' },
-    { src: 'landscape50.jpg', type: 'screenshot', year: '2021', season: 'summer', color: 'incandescent' },
- 
+    { src: 'landscape01.jpg', type: ['lake', 'mountain'], year: '2020', weather: 'summer', color: 'bluesky' },
+    { src: 'landscape02.jpg', type: ['farm', 'agriculture'], year: '2021', weather: 'spring', color: 'warm' },
+    { src: 'landscape03.jpg', type: ['screenshot'], year: '2021', weather: 'winter', color: 'candlelight' },
+    { src: 'landscape04.jpg', type: ['farm', 'agriculture'], year: '2021', weather: 'summer', color: 'bluesky' },
+    { src: 'landscape05.jpg', type: ['sea', 'tropics'], year: '2021', weather: 'summer', color: 'pastel' },
+    { src: 'landscape06.jpg', type: ['cityscape', 'urban', 'streetscenes'], year: '2022', weather: 'summer', color: 'candlelight' },
+    { src: 'landscape07.jpg', type: ['forest'], year: '2021', weather: 'fall', color: 'incandescent' },
+    { src: 'landscape08.jpg', type: ['lake'], year: '2023', weather: 'fall', color: 'coolcolors' },
+    { src: 'landscape09.jpg', type: ['mountain'], year: '2020', weather: 'snow', color: 'monochrome' },
+    { src: 'landscape10.jpg', type: ['forest'], year: '2020', weather: 'winter', color: 'warm' },
+    { src: 'landscape11.jpg', type: ['mountain'], year: '2021', weather: 'spring', color: 'pastel' },
+    { src: 'landscape12.jpg', type: ['urban', 'streetscenes'], year: '2021', weather: 'cloudy', color: 'coolcolors' },
+    { src: 'landscape13.jpg', type: ['lake'], year: '2023', weather: 'summer', color: 'earthtones' },
+    { src: 'landscape14.jpg', type: ['tropics'], year: '2022', weather: 'summer', color: 'vibrant' },
+    { src: 'landscape15.jpg', type: ['sea'], year: '2023', weather: 'summer', color: 'bluesky' },
+    { src: 'landscape16.jpg', type: ['forest', 'streetscenes'], year: '2023', weather: 'rainy', color: 'coolcolors' },
+    { src: 'landscape17.jpg', type: ['forest'], year: '2023', weather: 'fall', color: 'vibrant' },
+    { src: 'landscape18.jpg', type: ['farm', 'agriculture'], year: '2022', weather: 'summer', color: 'daylightdirectsun' },
+    { src: 'landscape19.jpg', type: ['architectural'], year: '2021', weather: 'winter', color: 'coolcolors' },
+    { src: 'landscape20.jpg', type: ['mountain', 'forest'], year: '2023', weather: 'fog', color: 'coolcolors' },
+    { src: 'landscape21.jpg', type: ['urban'], year: '2022', weather: 'spring', color: 'incandescent' },
+    { src: 'landscape22.jpg', type: ['cityscape'], year: '2023', weather: 'fall', color: 'coolcolors' },
+    { src: 'landscape23.jpg', type: ['architectural', 'river', 'urban'], year: '2023', weather: 'summer', color: 'bluesky' },
+    { src: 'landscape24.jpg', type: ['river'], year: '2023', weather: 'summer', color: 'vibrant' },
+    { src: 'landscape25.jpg', type: ['cityscape', 'river'], year: '2024', weather: 'summer', color: 'warm' },
+    { src: 'landscape26.jpg', type: ['book', 'urban', 'cityscape'], year: '2024', weather: 'spring', color: 'warm' },
+    { src: 'landscape27.jpg', type: ['lake', 'mountain'], year: '2022', weather: 'summer', color: 'bluesky' },
+    { src: 'landscape28.jpg', type: ['lake'], year: '2023', weather: 'summer', color: 'warm' },
+    { src: 'landscape29.jpg', type: ['mountain', 'forest'], year: '2023', weather: 'fog', color: 'neutral' },
+    { src: 'landscape30.jpg', type: ['coast', 'sea'], year: '2023', weather: 'spring', color: 'bluesky' },
+    { src: 'landscape31.jpg', type: ['river', 'forest'], year: '2024', weather: 'winter', color: 'coolcolors' },
+    { src: 'landscape32.jpg', type: ['forest'], year: '2024', weather: 'winter', color: 'monochrome' },
+    { src: 'landscape33.jpg', type: ['coast', 'sea', 'book'], year: '2023', weather: 'summer', color: 'bluesky' },
+    { src: 'landscape34.jpg', type: ['coast', 'sea'], year: '2023', weather: 'spring', color: 'warm' },
+    { src: 'landscape35.jpg', type: ['coast', 'sea'], year: '2023', weather: 'summer', color: 'incandescent' },
+    { src: 'landscape36.jpg', type: ['architectural'], year: '2023', weather: 'spring', color: 'coolcolors' },
+    { src: 'landscape37.jpg', type: ['urban', 'cityscape'], year: '2024', weather: 'fall', color: 'warm' },
+    { src: 'landscape38.jpg', type: ['architectural', 'cityscape'], year: '2024', weather: 'spring', color: 'earthtones' },
+    { src: 'landscape39.jpg', type: ['farm'], year: '2023', weather: 'summer', color: 'warm' },
+    { src: 'landscape40.jpg', type: ['agriculture'], year: '2020', weather: 'summer', color: 'bluesky' },
+    { src: 'landscape41.jpg', type: ['forest'], year: '2023', weather: 'summer', color: 'daylightdirectsun' },
+    { src: 'landscape42.jpg', type: ['cityscape'], year: '2024', weather: 'spring', color: 'coolcolors' },
+    { src: 'landscape43.jpg', type: ['urban', 'cityscape'], year: '2024', weather: 'spring', color: 'candlelight' },
+    { src: 'landscape44.jpg', type: ['streetscenes', 'urban'], year: '2024', weather: 'rainy', color: 'monochrome' },
+    { src: 'landscape45.jpg', type: ['urban'], year: '2024', weather: 'winter', color: 'incandescent' },
+    { src: 'landscape46.jpg', type: ['book'], year: '2024', weather: 'spring', color: 'monochrome' },
+    { src: 'landscape47.jpg', type: ['book'], year: '2024', weather: 'spring', color: 'warm' },
+    { src: 'landscape48.jpg', type: ['screenshot', 'forest'], year: '2024', weather: 'winter', color: 'coolcolors' },
+    { src: 'landscape49.jpg', type: ['screenshot', 'forest'], year: '2023', weather: 'summer', color: 'daylightdirectsun' },
+    { src: 'landscape50.jpg', type: ['screenshot', 'tropics', 'urban'], year: '2021', weather: 'summer', color: 'incandescent' },
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
-    applyFilters(); 
+    applyFilters();
 
-    
     document.getElementById('landscapeType').addEventListener('change', applyFilters);
     document.getElementById('year').addEventListener('change', applyFilters);
-    document.getElementById('season').addEventListener('change', applyFilters);
+    document.getElementById('weather').addEventListener('change', applyFilters);
     document.getElementById('color').addEventListener('change', applyFilters);
 
     document.getElementById('clearFilters').addEventListener('click', () => {
         // Reset all select elements to their default option (value="")
         document.getElementById('landscapeType').value = "";
         document.getElementById('year').value = "";
-        document.getElementById('season').value = "";
+        document.getElementById('weather').value = "";
         document.getElementById('color').value = "";
 
         applyFilters(); // Reload images based on the reset filters
@@ -78,24 +76,40 @@ function applyFilters() {
 
     const typeFilter = document.getElementById('landscapeType').value;
     const yearFilter = document.getElementById('year').value;
-    const seasonFilter = document.getElementById('season').value;
+    const weatherFilter = document.getElementById('weather').value;
     const colorFilter = document.getElementById('color').value;
 
+    console.log("Filters Applied:");
+    console.log("Type Filter:", typeFilter);
+    console.log("Year Filter:", yearFilter);
+    console.log("Weather Filter:", weatherFilter);
+    console.log("Color Filter:", colorFilter);
+
     const filteredImages = images.filter(image => {
-        return (!typeFilter || image.type === typeFilter) &&
+        return (!typeFilter || (Array.isArray(image.type) && image.type.includes(typeFilter))) &&
                (!yearFilter || image.year === yearFilter) &&
-               (!seasonFilter || image.season === seasonFilter) &&
+               (!weatherFilter || image.weather === weatherFilter) &&
                (!colorFilter || image.color === colorFilter);
     });
 
+    console.log("Filtered Images:", filteredImages);
+
+    shuffleArray(filteredImages); // Shuffle the array to randomize the image order
+
+    let delay = 0;
+    const interval = 250; // Set a constant interval in milliseconds
+
     filteredImages.forEach((image, index) => {
         setTimeout(() => {
-            loadImage(image, container);
-        }, index * 250); // Load each image with a slight delay for a loading effect
+            // Ensure a random image is positioned at the top
+            const positionTop = index === 0;
+            loadImage(image, container, positionTop);
+        }, delay);
+        delay += interval; // Increase delay by the fixed interval for each image
     });
 }
 
-function loadImage(image, container) {
+function loadImage(image, container, positionTop = false) {
     const img = document.createElement('img');
     const imgWidthVw = getRandomSize(10, 20); // Image width in vw units
 
@@ -104,7 +118,11 @@ function loadImage(image, container) {
 
     const imgWidthPercent = vwToPercent(imgWidthVw, container.offsetWidth);
     img.style.left = `${getRandomLeft(imgWidthPercent, container.offsetWidth)}%`;
-    img.style.top = `${getRandomPercentage()}%`;
+    img.style.top = positionTop ? '10%' : `${getRandomPercentage()}%`; // Ensure first image is at the top with padding
+
+    img.onload = () => {
+        img.style.opacity = 1; // Ensure the image is visible once loaded
+    };
 
     img.onclick = () => {
         const pageName = pageMapping[image.src];
@@ -132,6 +150,13 @@ function vwToPercent(vw, containerWidth) {
 function getRandomLeft(imgWidthPercent, containerWidth) {
     const maxLeft = 100 - imgWidthPercent;
     return Math.random() * maxLeft;
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
 }
 
 // Define a mapping between image filenames and page filenames
@@ -186,5 +211,4 @@ const pageMapping = {
     'landscape48.jpg': 'pages/inner48.html',
     'landscape49.jpg': 'pages/inner49.html',
     'landscape50.jpg': 'pages/inner50.html',
-    
 };

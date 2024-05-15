@@ -38,6 +38,7 @@ body, html {
     justify-content: space-between;
     padding: 50px 0 0 20px;
    
+   
 }
 
 .header a{
@@ -49,11 +50,12 @@ body, html {
     font-family: "Roboto", sans-serif;
     font-weight: 300;
     font-style: normal;
+     
 }
 
 .sub-title {
     font-size: 12px;
-    padding-right:20px;
+    padding:0 20px 3px 0;
     align-self: flex-end; 
     font-family: "Roboto", sans-serif;
     font-weight: 300;
@@ -119,17 +121,42 @@ body, html {
     position: relative;
     width: 100%;
     min-height: 100vh;
-    padding-top: 0;
+    padding-top: 0px;
     margin-top:0;
+    background-color:white;
 }
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 
 .image-container img {
     position: absolute;
     transition: transform 0.2s;
     cursor: pointer;
     background-color: #f0f0f0;
-    transition: transform 0.2s, opacity 0.3s ease-in; 
-    opacity: 0; 
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+.image-container img.fade-out {
+    animation: fadeOut 1s forwards; 
 }
 
 .image-container img:hover {
@@ -212,8 +239,21 @@ body, html {
         text-align: center;
     }
 
+
     .detail-image {
         max-width: calc(100% - 20px);
         max-height: calc(100vh - 150px);
+    }
+
+    .filter {
+        padding: 40px 0 0 20px; 
+    }
+
+    .header{
+        padding: 30px 0 0 20px; 
+    }
+    .header a{
+        display: inline-block;
+        width: 20%;
     }
 }
