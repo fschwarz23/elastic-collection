@@ -54,43 +54,78 @@ const images = [
 document.addEventListener('DOMContentLoaded', () => {
     applyFilters();
 
-    document.getElementById('landscapeType').addEventListener('change', applyFilters);
-    document.getElementById('year').addEventListener('change', applyFilters);
-    document.getElementById('weather').addEventListener('change', applyFilters);
-    document.getElementById('color').addEventListener('change', applyFilters);
+    const landscapeTypeElement = document.getElementById('landscapeType');
+    const yearElement = document.getElementById('year');
+    const weatherElement = document.getElementById('weather');
+    const colorElement = document.getElementById('color');
+    const clearFiltersElement = document.getElementById('clearFilters');
 
-    document.getElementById('clearFilters').addEventListener('click', () => {
-        // Reset all select elements to their default option (value="")
-        document.getElementById('landscapeType').value = "";
-        document.getElementById('year').value = "";
-        document.getElementById('weather').value = "";
-        document.getElementById('color').value = "";
+    if (landscapeTypeElement) {
+        landscapeTypeElement.addEventListener('change', applyFilters);
+    }
+    if (yearElement) {
+        yearElement.addEventListener('change', applyFilters);
+    }
+    if (weatherElement) {
+        weatherElement.addEventListener('change', applyFilters);
+    }
+    if (colorElement) {
+        colorElement.addEventListener('change', applyFilters);
+    }
+    if (clearFiltersElement) {
+        clearFiltersElement.addEventListener('click', () => {
+            // Reset all select elements to their default option (value="")
+            if (landscapeTypeElement) landscapeTypeElement.value = "";
+            if (yearElement) yearElement.value = "";
+            if (weatherElement) weatherElement.value = "";
+            if (colorElement) colorElement.value = "";
 
-        applyFilters(); // Reload images based on the reset filters
-    });
+            applyFilters(); // Reload images based on the reset filters
+        });
+    }
 
-    // If this script is also used on the detail page
-    const detailImage = document.querySelector('.detail-image');
-    if (detailImage) {
-        const src = detailImage.src.split('/').pop();
-        const image = images.find(img => img.src === src);
-        if (image) {
-            console.log("Image found:", image); // Debugging line
-            populateHashtags(image);
-        } else {
-            console.log("Image not found in the images array."); // Debugging line
-        }
+    // For the detail page
+    if (document.querySelector('.image-detail-container')) {
+        addHashtagsToDetailPage();
     }
 });
 
+function addHashtagsToDetailPage() {
+    const imgElement = document.querySelector('.detail-image');
+    console.log("Image element:", imgElement);
+    if (imgElement) {
+        const imgSrc = imgElement.src.split('/').pop(); // Get the image file name
+        console.log("Image source:", imgSrc);
+        const imageData = images.find(image => image.src === imgSrc);
+        console.log("Image data:", imageData);
+        if (imageData) {
+            const hashtags = [];
+            if (imageData.type) hashtags.push(...imageData.type.map(type => `#${type}`));
+            if (imageData.year) hashtags.push(`#${imageData.year}`);
+            if (imageData.weather) hashtags.push(`#${imageData.weather}`);
+            if (imageData.color) hashtags.push(`#${imageData.color}`);
+
+            const hashtagsElement = document.getElementById('image-hashtags');
+            console.log("Hashtags element:", hashtagsElement);
+            hashtagsElement.textContent = hashtags.join(' ');
+            console.log("Hashtags:", hashtags.join(' '));
+        }
+    }
+}
+
 function applyFilters() {
     const container = document.getElementById('imageContainer');
+    if (!container) {
+        console.error("Container element with ID 'imageContainer' not found.");
+        return;
+    }
+
     container.innerHTML = ''; // Clear current images
 
-    const typeFilter = document.getElementById('landscapeType').value;
-    const yearFilter = document.getElementById('year').value;
-    const weatherFilter = document.getElementById('weather').value;
-    const colorFilter = document.getElementById('color').value;
+    const typeFilter = document.getElementById('landscapeType') ? document.getElementById('landscapeType').value : "";
+    const yearFilter = document.getElementById('year') ? document.getElementById('year').value : "";
+    const weatherFilter = document.getElementById('weather') ? document.getElementById('weather').value : "";
+    const colorFilter = document.getElementById('color') ? document.getElementById('color').value : "";
 
     const filteredImages = images.filter(image => {
         return (!typeFilter || image.type.includes(typeFilter)) &&
@@ -118,7 +153,7 @@ function loadImage(image, container, positionTop = false) {
     const img = document.createElement('img');
     const imgWidthVw = getRandomSize(10, 20); // Image width in vw units
 
-    img.src = `assets/images/${image.src}`;
+    img.src = `../assets/images/${image.src}`;
     img.style.width = `${imgWidthVw}vw`;
 
     const imgWidthPercent = vwToPercent(imgWidthVw, container.offsetWidth);
@@ -161,20 +196,6 @@ function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
-    }
-}
-
-function populateHashtags(image) {
-    const hashtagsContainer = document.getElementById('image-hashtags');
-    if (hashtagsContainer) {
-        const hashtags = [
-            ...image.type.map(type => `#${type}`),
-            `#${image.year}`,
-            `#${image.weather}`,
-            `#${image.color}`
-        ];
-        hashtagsContainer.textContent = hashtags.join(' ');
-        console.log("Hashtags added:", hashtagsContainer.textContent); // Debugging line
     }
 }
 
