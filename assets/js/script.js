@@ -68,6 +68,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         applyFilters(); // Reload images based on the reset filters
     });
+
+    // If this script is also used on the detail page
+    const detailImage = document.querySelector('.detail-image');
+    if (detailImage) {
+        const src = detailImage.src.split('/').pop();
+        const image = images.find(img => img.src === src);
+        if (image) {
+            console.log("Image found:", image); // Debugging line
+            populateHashtags(image);
+        } else {
+            console.log("Image not found in the images array."); // Debugging line
+        }
+    }
 });
 
 function applyFilters() {
@@ -79,20 +92,12 @@ function applyFilters() {
     const weatherFilter = document.getElementById('weather').value;
     const colorFilter = document.getElementById('color').value;
 
-    console.log("Filters Applied:");
-    console.log("Type Filter:", typeFilter);
-    console.log("Year Filter:", yearFilter);
-    console.log("Weather Filter:", weatherFilter);
-    console.log("Color Filter:", colorFilter);
-
     const filteredImages = images.filter(image => {
-        return (!typeFilter || (Array.isArray(image.type) && image.type.includes(typeFilter))) &&
+        return (!typeFilter || image.type.includes(typeFilter)) &&
                (!yearFilter || image.year === yearFilter) &&
                (!weatherFilter || image.weather === weatherFilter) &&
                (!colorFilter || image.color === colorFilter);
     });
-
-    console.log("Filtered Images:", filteredImages);
 
     shuffleArray(filteredImages); // Shuffle the array to randomize the image order
 
@@ -156,6 +161,20 @@ function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+function populateHashtags(image) {
+    const hashtagsContainer = document.getElementById('image-hashtags');
+    if (hashtagsContainer) {
+        const hashtags = [
+            ...image.type.map(type => `#${type}`),
+            `#${image.year}`,
+            `#${image.weather}`,
+            `#${image.color}`
+        ];
+        hashtagsContainer.textContent = hashtags.join(' ');
+        console.log("Hashtags added:", hashtagsContainer.textContent); // Debugging line
     }
 }
 

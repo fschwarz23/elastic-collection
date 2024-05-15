@@ -8,27 +8,25 @@
     font-family: "GoogleSans"; 
     src: url("assets/fonts/GoogleSans.otf") format("opentype");
     font-style: normal;
- } 
+} 
  
- @font-face { 
+@font-face { 
     font-family: "GoogleSansItalic"; 
     src: url("assets/fonts/GoogleSansItalic.otf") format("opentype"); 
     font-style: normal;
- } 
+} 
 
-  @font-face { 
+@font-face { 
     font-family: "GoogleSansMedium"; 
     src: url("assets/fonts/GoogleSansMedium.otf") format("opentype"); 
     font-style: normal;
- } 
+} 
 
- @font-face { 
+@font-face { 
     font-family: "GoogleSansBold"; 
     src: url("assets/fonts/GoogleSansBold.otf") format("opentype"); 
-    
- } 
+} 
 
- 
 body, html {
     padding: 0 25px;
 }
@@ -37,25 +35,23 @@ body, html {
     display: flex;
     justify-content: space-between;
     padding: 50px 0 0 20px;
-   
-   
 }
 
-.header a{
+.header a {
     text-decoration: none;
     color: black;
 }
+
 .title {
     font-size: 26px;
     font-family: "Roboto", sans-serif;
     font-weight: 300;
     font-style: normal;
-     
 }
 
 .sub-title {
     font-size: 12px;
-    padding:0 20px 3px 0;
+    padding: 0 20px 3px 0;
     align-self: flex-end; 
     font-family: "Roboto", sans-serif;
     font-weight: 300;
@@ -91,9 +87,7 @@ body, html {
     text-indent: 1px; 
     text-overflow: ""; 
     width: 200px;
-  
 }
-
 
 .filter select:last-child {
     margin-right: 0;
@@ -122,10 +116,9 @@ body, html {
     width: 100%;
     min-height: 100vh;
     padding-top: 0px;
-    margin-top:0;
-    background-color:white;
+    margin-top: 0;
+    background-color: white;
 }
-
 
 @keyframes fadeIn {
     from {
@@ -144,7 +137,6 @@ body, html {
         opacity: 0;
     }
 }
-
 
 .image-container img {
     position: absolute;
@@ -165,29 +157,27 @@ body, html {
 }
 
 @media (max-width: 768px) {
-    body{
-        padding: 0;
-        margin: 0;
+    body, html {
+        padding: 0 5px; /* Reduce padding on mobile */
     }
     .filter {
         flex-direction: column;
-        
+        padding: 20px 5px 0 5px; /* Reduce padding */
     }
-
     .filter select,
     .filter #clearFilters {
         width: calc(100% - 10px);
-        margin: 0; 
+        margin: 0;
         box-sizing: border-box;
-       
     }
-
-  
-
-
+    .header {
+        padding: 30px 5px 0 5px; /* Reduce padding */
+    }
+    .header a {
+        display: inline-block;
+        width: 100%;
+    }
 }
-
-
 
 /*inner page*/
 
@@ -200,11 +190,12 @@ body, html {
 }
 
 .detail-image {
-    max-width: calc(100% - 100px);
-    max-height: calc(100vh - 200px);
-    margin: 0 auto;
-    border: 50px solid white;
-    box-sizing: border-box;
+    width: 100%;
+    max-width: 800px;
+    max-height: 100vh; /* Ensure the image fits within the viewport height */
+    height: auto;
+    border: 5px solid white;
+    object-fit: contain; /* Ensure the image is contained within the given dimensions */
 }
 
 .image-info {
@@ -218,42 +209,42 @@ body, html {
     margin: 5px 0;
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    font-size: 11px;
+    font-size: 14px;
     color: #9B9B9B;
-    text-align: left;
 }
 
 .image-hashtags {
-    font-size: 12px;
+    font-size: 14px;
     color: #666;
     font-family: 'Roboto', sans-serif;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
+    .image-detail-container {
+        padding: 20px 5px; /* Reduce padding */
+        gap: 15px;
+    }
+    .detail-image {
+        max-width: 100%;
+        max-height: calc(100vh - 100px); /* Adjust to fit within the viewport considering other elements */
+        height: auto;
+    }
+    .image-info {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .info-block p {
+        font-size: 12px;
+    }
+    .image-hashtags {
+        font-size: 12px;
+    }
     .image-info {
         flex-direction: column;
         align-items: center;
     }
-
     .info-block {
         text-align: center;
-    }
-
-
-    .detail-image {
-        max-width: calc(100% - 20px);
-        max-height: calc(100vh - 150px);
-    }
-
-    .filter {
-        padding: 40px 0 0 20px; 
-    }
-
-    .header{
-        padding: 30px 0 0 20px; 
-    }
-    .header a{
-        display: inline-block;
-        width: 20%;
     }
 }
