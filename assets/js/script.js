@@ -1,6 +1,6 @@
 const images = [
     { src: 'landscape01.jpg', type: ['lake', 'mountain'], year: '2020', weather: 'summer', color: 'bluesky' },
-    { src: 'landscape02.jpg', type: ['farm', 'agriculture'], year: '2021', weather: 'spring', color: 'warm' },
+    { src: 'landscape02.jpg', type: ['screenshot', 'agriculture'], year: '2024', weather: 'cloudy', color: 'coolcolors' },
     { src: 'landscape03.jpg', type: ['screenshot'], year: '2021', weather: 'winter', color: 'candlelight' },
     { src: 'landscape04.jpg', type: ['farm', 'agriculture'], year: '2021', weather: 'summer', color: 'bluesky' },
     { src: 'landscape05.jpg', type: ['sea', 'tropics'], year: '2021', weather: 'summer', color: 'pastel' },
