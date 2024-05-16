@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+body, html {
+    padding: 0 25px;
+  
+}
+
 @font-face { 
     font-family: "GoogleSans"; 
     src: url("assets/fonts/GoogleSans.otf") format("opentype");
@@ -27,9 +32,7 @@
     src: url("assets/fonts/GoogleSansBold.otf") format("opentype"); 
 } 
 
-body, html {
-    padding: 0 25px;
-}
+
 
 .header {
     display: flex;
@@ -248,3 +251,6 @@ body, html {
         text-align: center;
     }
 }
+
+
+ 

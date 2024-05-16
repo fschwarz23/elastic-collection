@@ -1,5 +1,5 @@
 const images = [
-    { src: 'landscape01.jpg', type: ['lake', 'mountain'], year: '2021', weather: 'summer', color: 'bluesky' },
+    { src: 'landscape01.jpg', type: ['lake', 'mountain'], year: '2020', weather: 'summer', color: 'bluesky' },
     { src: 'landscape02.jpg', type: ['screenshot', 'agriculture'], year: '2024', weather: 'cloudy', color: 'coolcolors' },
     { src: 'landscape03.jpg', type: ['mountain', 'screenshot'], year: '2021', weather: 'winter', color: 'candlelight' },
     { src: 'landscape04.jpg', type: ['farm', 'agriculture'], year: '2021', weather: 'summer', color: 'bluesky' },
@@ -7,8 +7,8 @@ const images = [
     { src: 'landscape06.jpg', type: ['cityscape', 'urban', 'streetscenes'], year: '2022', weather: 'summer', color: 'candlelight' },
     { src: 'landscape07.jpg', type: ['forest'], year: '2022', weather: 'fall', color: 'incandescent' },
     { src: 'landscape08.jpg', type: ['lake'], year: '2023', weather: 'fall', color: 'coolcolors' },
-    { src: 'landscape09.jpg', type: ['mountain'], year: '2021', weather: 'snow', color: 'monochrome' },
-    { src: 'landscape10.jpg', type: ['forest'], year: '2021', weather: 'winter', color: 'warm' },
+    { src: 'landscape09.jpg', type: ['mountain'], year: '2020', weather: 'snow', color: 'monochrome' },
+    { src: 'landscape10.jpg', type: ['forest'], year: '2020', weather: 'winter', color: 'warm' },
     { src: 'landscape11.jpg', type: ['mountain'], year: '2021', weather: 'spring', color: 'pastel' },
     { src: 'landscape12.jpg', type: ['urban', 'streetscenes'], year: '2021', weather: 'cloudy', color: 'coolcolors' },
     { src: 'landscape13.jpg', type: ['lake'], year: '2023', weather: 'summer', color: 'earthtones' },
@@ -27,7 +27,7 @@ const images = [
     { src: 'landscape26.jpg', type: ['book', 'urban', 'cityscape'], year: '2022', weather: 'summer', color: 'warm' },
     { src: 'landscape27.jpg', type: ['lake', 'mountain'], year: '2022', weather: 'summer', color: 'bluesky' },
     { src: 'landscape28.jpg', type: ['lake'], year: '2023', weather: 'summer', color: 'warm' },
-    { src: 'landscape29.jpg', type: ['mountain', 'forest'], year: '2023', weather: 'fog', color: 'coolcolors' },
+    { src: 'landscape29.jpg', type: ['mountain', 'forest'], year: '2023', weather: 'fog', color: 'neutral' },
     { src: 'landscape30.jpg', type: ['coast', 'sea'], year: '2022', weather: 'summer', color: 'bluesky' },
     { src: 'landscape31.jpg', type: ['river', 'forest'], year: '2024', weather: 'winter', color: 'coolcolors' },
     { src: 'landscape32.jpg', type: ['sea'], year: '2023', weather: 'summer', color: 'candlelight' },
@@ -51,9 +51,8 @@ const images = [
     { src: 'landscape50.jpg', type: ['screenshot', 'tropics', 'urban'], year: '2021', weather: 'summer', color: 'incandescent' },
 ];
 
-
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM fully loaded and parsed');
+    applyFilters();
 
     const landscapeTypeElement = document.getElementById('landscapeType');
     const yearElement = document.getElementById('year');
@@ -61,154 +60,144 @@ document.addEventListener('DOMContentLoaded', () => {
     const colorElement = document.getElementById('color');
     const clearFiltersElement = document.getElementById('clearFilters');
 
-    let loadTimeouts = [];
+    if (landscapeTypeElement) {
+        landscapeTypeElement.addEventListener('change', applyFilters);
+    }
+    if (yearElement) {
+        yearElement.addEventListener('change', applyFilters);
+    }
+    if (weatherElement) {
+        weatherElement.addEventListener('change', applyFilters);
+    }
+    if (colorElement) {
+        colorElement.addEventListener('change', applyFilters);
+    }
+    if (clearFiltersElement) {
+        clearFiltersElement.addEventListener('click', () => {
+            // Reset all select elements to their default option (value="")
+            if (landscapeTypeElement) landscapeTypeElement.value = "";
+            if (yearElement) yearElement.value = "";
+            if (weatherElement) weatherElement.value = "";
+            if (colorElement) colorElement.value = "";
 
-    // Attach event listeners if elements exist
-    if (landscapeTypeElement) landscapeTypeElement.addEventListener('change', applyFilters);
-    if (yearElement) yearElement.addEventListener('change', applyFilters);
-    if (weatherElement) weatherElement.addEventListener('change', applyFilters);
-    if (colorElement) colorElement.addEventListener('change', applyFilters);
-    if (clearFiltersElement) clearFiltersElement.addEventListener('click', clearFilters);
-
-    // Initial filter application
-    applyFilters();
+            applyFilters(); // Reload images based on the reset filters
+        });
+    }
 
     // For the detail page
     if (document.querySelector('.image-detail-container')) {
         addHashtagsToDetailPage();
     }
-
-    function clearFilters() {
-        const landscapeTypeElement = document.getElementById('landscapeType');
-        const yearElement = document.getElementById('year');
-        const weatherElement = document.getElementById('weather');
-        const colorElement = document.getElementById('color');
-
-        landscapeTypeElement.value = "";
-        yearElement.value = "";
-        weatherElement.value = "";
-        colorElement.value = "";
-
-        applyFilters();
-    }
-
-    function addHashtagsToDetailPage() {
-        const imgElement = document.querySelector('.detail-image');
-        if (imgElement) {
-            const imgSrc = imgElement.src.split('/').pop(); // Get the image file name
-            const imageData = images.find(image => image.src === imgSrc);
-            if (imageData) {
-                const hashtags = [];
-                if (imageData.type) hashtags.push(...imageData.type.map(type => `#${type}`));
-                if (imageData.year) hashtags.push(`#${imageData.year}`);
-                if (imageData.weather) hashtags.push(`#${imageData.weather}`);
-                if (imageData.color) hashtags.push(`#${imageData.color}`);
-
-                const hashtagsElement = document.getElementById('image-hashtags');
-                hashtagsElement.textContent = hashtags.join(' ');
-            }
-        }
-    }
-
-    function applyFilters() {
-        cancelLoading(); // Cancel any ongoing image loading
-
-        const container = document.getElementById('imageContainer');
-        if (!container) {
-            console.error("Container element with ID 'imageContainer' not found.");
-            return;
-        }
-
-        container.innerHTML = ''; // Clear current images
-
-        const typeFilter = document.getElementById('landscapeType').value;
-        const yearFilter = document.getElementById('year').value;
-        const weatherFilter = document.getElementById('weather').value;
-        const colorFilter = document.getElementById('color').value;
-
-        console.log('Filters:', { typeFilter, yearFilter, weatherFilter, colorFilter });
-
-        const filteredImages = images.filter(image => {
-            const typeMatch = !typeFilter || image.type.includes(typeFilter);
-            const yearMatch = !yearFilter || image.year === yearFilter;
-            const weatherMatch = !weatherFilter || image.weather === weatherFilter;
-            const colorMatch = !colorFilter || image.color === colorFilter;
-
-            return typeMatch && yearMatch && weatherMatch && colorMatch;
-        });
-
-        console.log('Filtered Images:', filteredImages);
-
-        shuffleArray(filteredImages); // Shuffle the array to randomize the image order
-
-        let delay = 0;
-        const interval = 250; // Set a constant interval in milliseconds
-
-        filteredImages.forEach((image, index) => {
-            const timeout = setTimeout(() => {
-                const positionTop = index === 0; // Ensure a random image is positioned at the top
-                loadImage(image, container, positionTop);
-            }, delay);
-            loadTimeouts.push(timeout);
-            delay += interval; // Increase delay by the fixed interval for each image
-        });
-    }
-
-    function loadImage(image, container, positionTop = false) {
-        const img = document.createElement('img');
-        const imgWidthVw = getRandomSize(10, 20); // Image width in vw units
-
-        img.src = `assets/images/${image.src}`;
-        img.style.width = `${imgWidthVw}vw`;
-
-        const imgWidthPercent = vwToPercent(imgWidthVw, container.offsetWidth);
-        img.style.left = `${getRandomLeft(imgWidthPercent, container.offsetWidth)}%`;
-        img.style.top = positionTop ? '10%' : `${getRandomPercentage()}%`; // Ensure first image is at the top with padding
-
-        img.onload = () => {
-            img.style.opacity = 1; // Ensure the image is visible once loaded
-        };
-
-        img.onclick = () => {
-            const pageName = pageMapping[image.src];
-            if (pageName) {
-                window.location.href = pageName;
-            }
-        };
-
-        container.appendChild(img);
-    }
-
-    function getRandomSize(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function getRandomPercentage() {
-        return Math.floor(Math.random() * 80) + 10;
-    }
-
-    function vwToPercent(vw, containerWidth) {
-        const percent = (vw / 100) * document.documentElement.clientWidth;
-        return (percent / containerWidth) * 100;
-    }
-
-    function getRandomLeft(imgWidthPercent, containerWidth) {
-        const maxLeft = 100 - imgWidthPercent;
-        return Math.random() * maxLeft;
-    }
-
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    }
-
-    function cancelLoading() {
-        loadTimeouts.forEach(timeout => clearTimeout(timeout));
-        loadTimeouts = [];
-    }
 });
+
+function addHashtagsToDetailPage() {
+    const imgElement = document.querySelector('.detail-image');
+    console.log("Image element:", imgElement);
+    if (imgElement) {
+        const imgSrc = imgElement.src.split('/').pop(); // Get the image file name
+        console.log("Image source:", imgSrc);
+        const imageData = images.find(image => image.src === imgSrc);
+        console.log("Image data:", imageData);
+        if (imageData) {
+            const hashtags = [];
+            if (imageData.type) hashtags.push(...imageData.type.map(type => `#${type}`));
+            if (imageData.year) hashtags.push(`#${imageData.year}`);
+            if (imageData.weather) hashtags.push(`#${imageData.weather}`);
+            if (imageData.color) hashtags.push(`#${imageData.color}`);
+
+            const hashtagsElement = document.getElementById('image-hashtags');
+            console.log("Hashtags element:", hashtagsElement);
+            hashtagsElement.textContent = hashtags.join(' ');
+            console.log("Hashtags:", hashtags.join(' '));
+        }
+    }
+}
+
+function applyFilters() {
+    const container = document.getElementById('imageContainer');
+    if (!container) {
+        console.error("Container element with ID 'imageContainer' not found.");
+        return;
+    }
+
+    container.innerHTML = ''; // Clear current images
+
+    const typeFilter = document.getElementById('landscapeType') ? document.getElementById('landscapeType').value : "";
+    const yearFilter = document.getElementById('year') ? document.getElementById('year').value : "";
+    const weatherFilter = document.getElementById('weather') ? document.getElementById('weather').value : "";
+    const colorFilter = document.getElementById('color') ? document.getElementById('color').value : "";
+
+    const filteredImages = images.filter(image => {
+        return (!typeFilter || image.type.includes(typeFilter)) &&
+               (!yearFilter || image.year === yearFilter) &&
+               (!weatherFilter || image.weather === weatherFilter) &&
+               (!colorFilter || image.color === colorFilter);
+    });
+
+    shuffleArray(filteredImages); // Shuffle the array to randomize the image order
+
+    let delay = 0;
+    const interval = 250; // Set a constant interval in milliseconds
+
+    filteredImages.forEach((image, index) => {
+        setTimeout(() => {
+            // Ensure a random image is positioned at the top
+            const positionTop = index === 0;
+            loadImage(image, container, positionTop);
+        }, delay);
+        delay += interval; // Increase delay by the fixed interval for each image
+    });
+}
+
+function loadImage(image, container, positionTop = false) {
+    const img = document.createElement('img');
+    const imgWidthVw = getRandomSize(10, 20); // Image width in vw units
+
+    img.src = `assets/images/${image.src}`;
+    img.style.width = `${imgWidthVw}vw`;
+
+    const imgWidthPercent = vwToPercent(imgWidthVw, container.offsetWidth);
+    img.style.left = `${getRandomLeft(imgWidthPercent, container.offsetWidth)}%`;
+    img.style.top = positionTop ? '10%' : `${getRandomPercentage()}%`; // Ensure first image is at the top with padding
+
+    img.onload = () => {
+        img.style.opacity = 1; // Ensure the image is visible once loaded
+    };
+
+    img.onclick = () => {
+        const pageName = pageMapping[image.src];
+        if (pageName) {
+            window.location.href = pageName;
+        }
+    };
+
+    container.appendChild(img);
+}
+
+function getRandomSize(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getRandomPercentage() {
+    return Math.floor(Math.random() * 80) + 10;
+}
+
+function vwToPercent(vw, containerWidth) {
+    const percent = (vw / 100) * document.documentElement.clientWidth;
+    return (percent / containerWidth) * 100;
+}
+
+function getRandomLeft(imgWidthPercent, containerWidth) {
+    const maxLeft = 100 - imgWidthPercent;
+    return Math.random() * maxLeft;
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
 
 // Define a mapping between image filenames and page filenames
 const pageMapping = {
