@@ -153,7 +153,7 @@ function loadImage(image, container, positionTop = false) {
     const img = document.createElement('img');
     const imgWidthVw = getRandomSize(10, 20); // Image width in vw units
 
-    img.src = `../assets/images/${image.src}`;
+    img.src = `assets/images/${image.src}`;
     img.style.width = `${imgWidthVw}vw`;
 
     const imgWidthPercent = vwToPercent(imgWidthVw, container.offsetWidth);
