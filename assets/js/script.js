@@ -150,19 +150,21 @@ document.addEventListener('DOMContentLoaded', () => {
         let delay = 0;
         const interval = 250; // Set a constant interval in milliseconds
 
+        const imageSizeRange = filteredImages.length <= 5 ? { min: 15, max: 20 } : { min: 8, max: 15 }; // Larger size for fewer images
+
         filteredImages.forEach((image, index) => {
             const timeout = setTimeout(() => {
                 const positionTop = index < 5; // Ensure the first few images are positioned at the top
-                loadImage(image, container, positionTop, filteredImages.length <= 5);
+                loadImage(image, container, positionTop, filteredImages.length <= 5, imageSizeRange);
             }, delay);
             loadTimeouts.push(timeout);
             delay += interval; // Increase delay by the fixed interval for each image
         });
     }
 
-    function loadImage(image, container, positionTop = false, clustered = false) {
+    function loadImage(image, container, positionTop = false, clustered = false, sizeRange) {
         const img = document.createElement('img');
-        const imgWidthVw = getRandomSize(12, 20); // Adjusted smaller image width to be slightly larger
+        const imgWidthVw = getRandomSize(sizeRange.min, sizeRange.max); // Adjusted image width based on number of images
 
         img.src = `assets/images/${image.src}`;
         img.style.width = `${imgWidthVw}vw`;
@@ -229,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hashtagsElement.textContent = hashtags.join(' ');
     }
 
-    function getRandomSize(min, max) {
+    function getRandomSize(min = 8, max = 15) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
