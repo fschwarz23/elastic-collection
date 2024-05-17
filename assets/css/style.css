@@ -6,43 +6,13 @@
 
 body, html {
     padding: 0 25px;
-  
 }
-
-@font-face { 
-    font-family: "GoogleSans"; 
-    src: url("assets/fonts/GoogleSans.otf") format("opentype");
-    font-style: normal;
-} 
- 
-@font-face { 
-    font-family: "GoogleSansItalic"; 
-    src: url("assets/fonts/GoogleSansItalic.otf") format("opentype"); 
-    font-style: normal;
-} 
-
-@font-face { 
-    font-family: "GoogleSansMedium"; 
-    src: url("assets/fonts/GoogleSansMedium.otf") format("opentype"); 
-    font-style: normal;
-} 
-
-@font-face { 
-    font-family: "GoogleSansBold"; 
-    src: url("assets/fonts/GoogleSansBold.otf") format("opentype"); 
-} 
-
-
 
 .header {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end; /* Align items at the bottom */
     padding: 50px 0 0 20px;
-}
-
-.header a {
-    text-decoration: none;
-    color: black;
 }
 
 .title {
@@ -52,13 +22,57 @@ body, html {
     font-style: normal;
 }
 
+.header a {
+    text-decoration: none;
+    color: black;
+}
+
 .sub-title {
     font-size: 12px;
-    padding: 0 20px 3px 0;
-    align-self: flex-end; 
     font-family: "Roboto", sans-serif;
     font-weight: 300;
     font-style: normal;
+    padding-bottom: 3px;  
+}
+
+.description-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;  
+    cursor: pointer;  
+    padding:5px 0 0 20px;
+}
+
+.description-toggle {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 20px;  
+    color: #848484;
+}
+
+.description-text {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    margin-left: 5px;
+    color: #848484;
+}
+
+.project-description {
+    display: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;  
+    color: #848484;
+    width: 60%; 
+    padding-left:23px;
+    line-height:20px;
+}
+
+.project-description p {
+    margin-bottom: 10px; /* Add spacing between the paragraphs */
 }
 
 .filter {
@@ -163,6 +177,19 @@ body, html {
     body, html {
         padding: 0 5px; /* Reduce padding on mobile */
     }
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 30px 5px 0 5px; /* Reduce padding */
+    }
+    .header a {
+        display: inline-block;
+        width: 100%;
+    }
+    .sub-title {
+        align-self: flex-start; /* Align sub-title to the start on mobile */
+        margin-top: 10px;
+    }
     .filter {
         flex-direction: column;
         padding: 20px 5px 0 5px; /* Reduce padding */
@@ -173,16 +200,25 @@ body, html {
         margin: 0;
         box-sizing: border-box;
     }
-    .header {
-        padding: 30px 5px 0 5px; /* Reduce padding */
+    .description-container {
+        margin-top: 5px;
+        padding: 15px 0 0 6px;
     }
-    .header a {
-        display: inline-block;
-        width: 100%;
+    .description-toggle {
+        font-size: 18px; /* Slightly smaller on mobile */
+    }
+    .description-text {
+        font-size: 13px; /* Slightly smaller on mobile */
+    }
+    .project-description {
+        width: 100%; /* Full width on mobile */
+        padding: 0 15px; /* Add padding on mobile */
+        font-size: 13px;
+        line-height: 1.4em;
     }
 }
 
-/*inner page*/
+/* Inner page */
 
 .image-detail-container {
     display: flex;
@@ -251,6 +287,3 @@ body, html {
         text-align: center;
     }
 }
-
-
- 

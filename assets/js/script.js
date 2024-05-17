@@ -51,7 +51,6 @@ const images = [
     { src: 'landscape50.jpg', type: ['screenshot', 'tropics', 'urban'], year: '2021', weather: 'summer', color: 'incandescent' },
 ];
 
-
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded and parsed');
 
@@ -60,17 +59,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const weatherElement = document.getElementById('weather');
     const colorElement = document.getElementById('color');
     const clearFiltersElement = document.getElementById('clearFilters');
+    const descriptionToggleElement = document.getElementById('descriptionToggle');
+    const projectDescriptionElement = document.getElementById('projectDescription');
 
     let loadTimeouts = [];
+    let placedImages = [];
 
-    // Attach event listeners if elements exist
     if (landscapeTypeElement) landscapeTypeElement.addEventListener('change', applyFilters);
     if (yearElement) yearElement.addEventListener('change', applyFilters);
     if (weatherElement) weatherElement.addEventListener('change', applyFilters);
     if (colorElement) colorElement.addEventListener('change', applyFilters);
     if (clearFiltersElement) clearFiltersElement.addEventListener('click', clearFilters);
+    if (descriptionToggleElement) descriptionToggleElement.addEventListener('click', toggleDescription);
 
-    // Initial filter application
     applyFilters();
 
     // For the detail page
@@ -78,17 +79,21 @@ document.addEventListener('DOMContentLoaded', () => {
         addHashtagsToDetailPage();
     }
 
-    function clearFilters() {
-        const landscapeTypeElement = document.getElementById('landscapeType');
-        const yearElement = document.getElementById('year');
-        const weatherElement = document.getElementById('weather');
-        const colorElement = document.getElementById('color');
+    function toggleDescription() {
+        if (projectDescriptionElement.style.display === 'none' || projectDescriptionElement.style.display === '') {
+            projectDescriptionElement.style.display = 'block';
+            descriptionToggleElement.querySelector('.description-toggle').textContent = '-';
+        } else {
+            projectDescriptionElement.style.display = 'none';
+            descriptionToggleElement.querySelector('.description-toggle').textContent = '+';
+        }
+    }
 
+    function clearFilters() {
         landscapeTypeElement.value = "";
         yearElement.value = "";
         weatherElement.value = "";
         colorElement.value = "";
-
         applyFilters();
     }
 
@@ -112,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function applyFilters() {
         cancelLoading(); // Cancel any ongoing image loading
+        placedImages = [];
 
         const container = document.getElementById('imageContainer');
         if (!container) {
@@ -121,10 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         container.innerHTML = ''; // Clear current images
 
-        const typeFilter = document.getElementById('landscapeType').value;
-        const yearFilter = document.getElementById('year').value;
-        const weatherFilter = document.getElementById('weather').value;
-        const colorFilter = document.getElementById('color').value;
+        const typeFilter = landscapeTypeElement.value;
+        const yearFilter = yearElement.value;
+        const weatherFilter = weatherElement.value;
+        const colorFilter = colorElement.value;
 
         console.log('Filters:', { typeFilter, yearFilter, weatherFilter, colorFilter });
 
@@ -146,27 +152,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
         filteredImages.forEach((image, index) => {
             const timeout = setTimeout(() => {
-                const positionTop = index === 0; // Ensure a random image is positioned at the top
-                loadImage(image, container, positionTop);
+                const positionTop = index < 5; // Ensure the first few images are positioned at the top
+                loadImage(image, container, positionTop, filteredImages.length <= 5);
             }, delay);
             loadTimeouts.push(timeout);
             delay += interval; // Increase delay by the fixed interval for each image
         });
     }
 
-    function loadImage(image, container, positionTop = false) {
+    function loadImage(image, container, positionTop = false, clustered = false) {
         const img = document.createElement('img');
-        const imgWidthVw = getRandomSize(10, 20); // Image width in vw units
+        const imgWidthVw = getRandomSize(12, 20); // Adjusted smaller image width to be slightly larger
 
         img.src = `assets/images/${image.src}`;
         img.style.width = `${imgWidthVw}vw`;
 
         const imgWidthPercent = vwToPercent(imgWidthVw, container.offsetWidth);
-        img.style.left = `${getRandomLeft(imgWidthPercent, container.offsetWidth)}%`;
-        img.style.top = positionTop ? '10%' : `${getRandomPercentage()}%`; // Ensure first image is at the top with padding
+        let left, top;
+
+        if (clustered) {
+            left = getRandomLeft(imgWidthPercent, container.offsetWidth / 2) + 25; // Center the images
+            top = getRandomPercentage(2, 10); // Keep images close to the top
+        } else {
+            // Attempt to place the image in a non-overlapping position
+            let attempts = 0;
+            const maxAttempts = 10; // Limit the number of attempts to prevent infinite loops
+            do {
+                left = getRandomLeft(imgWidthPercent, container.offsetWidth);
+                const minY = positionTop ? 4 : 7;
+                const maxY = positionTop ? 10 : 95;
+                top = getRandomPercentage(minY, maxY);
+                attempts++;
+            } while (checkCollision(left, top, imgWidthPercent) && attempts < maxAttempts);
+        }
+
+        // Ensure the left position stays within the container boundaries
+        left = Math.min(Math.max(left, 0), 100 - imgWidthPercent);
+
+        img.style.left = `${left}%`;
+        img.style.top = `${top}%`;
 
         img.onload = () => {
-            img.style.opacity = 1; // Ensure the image is visible once loaded
+            img.style.opacity = 1;
         };
 
         img.onclick = () => {
@@ -174,17 +201,40 @@ document.addEventListener('DOMContentLoaded', () => {
             if (pageName) {
                 window.location.href = pageName;
             }
+            updateHashtags(image);
         };
 
+        placedImages.push({ left, top, width: imgWidthPercent });
         container.appendChild(img);
+    }
+
+    function checkCollision(left, top, width) {
+        for (const img of placedImages) {
+            const distance = Math.sqrt(Math.pow(left - img.left, 2) + Math.pow(top - img.top, 2));
+            if (distance < width / 1.5) { // Adjusted the collision detection threshold
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function updateHashtags(image) {
+        const hashtags = [];
+        if (image.type) hashtags.push(...image.type.map(type => `#${type}`));
+        if (image.year) hashtags.push(`#${image.year}`);
+        if (image.weather) hashtags.push(`#${image.weather}`);
+        if (image.color) hashtags.push(`#${image.color}`);
+
+        const hashtagsElement = document.getElementById('image-hashtags');
+        hashtagsElement.textContent = hashtags.join(' ');
     }
 
     function getRandomSize(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    function getRandomPercentage() {
-        return Math.floor(Math.random() * 80) + 10;
+    function getRandomPercentage(min = 0, max = 100) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     function vwToPercent(vw, containerWidth) {

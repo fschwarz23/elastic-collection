@@ -6,81 +6,82 @@
     <title>In Search of Landscapes</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/script.js" defer></script>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="header">
+        <div class="title">
+            <a href="index.html">Hey Google, Search Landscapes</a>
+        </div>
+        <div class="sub-title">Curated by Google Photos on Google Pixel6</div>
+    </div>
+    <div class="description-container" id="descriptionToggle">
+        <div class="description-toggle">+</div>
+        <span class="description-text">Project Description</span>
+    </div>
+    <div class="project-description" id="projectDescription">
+        <p>
+            "In Search of Landscapes" is a curated collection of landscape photos taken on a Google Pixel6 phone. This collection explores a different approach to data curation. Instead of selecting images based on my perception of the best "landscape" aesthetic, I gathered images from the perspective of AI. Using Google Photos, I searched the term "landscape" and was intrigued by its interpretation. Alongside traditional landscape photos, the results included images with landscape themes such as pictures of other photographs, books, and phone screenshots.
 
-<div class="header">
-    <div class="title"><a href="index.html"> Hey Google, Search Landscapes</a></div>
-    <div class="sub-title">Curated by Google Photos on Google Pixel6</div>
-</div>
-
-<div class="filter">
-    <select id="landscapeType">
-        <option value="">Filter by Landscape Type</option>
-        <option value="lake">Lake</option>
-        <option value="mountain">Mountain</option>
-        <option value="farm">Farm</option>
-        <option value="agriculture">Agriculture</option>
-        <option value="screenshot">Screenshot</option>
-        <option value="sea">Sea</option>
-        <option value="tropics">Tropics</option>
-        <option value="cityscape">Cityscape</option>
-        <option value="urban">Urban</option>
-        <option value="streetscenes">Street Scenes</option>
-        <option value="forest">Forest</option>
-        <option value="architectural">Architectural</option>
-        <option value="river">River</option>
-        <option value="coast">Coast</option>
-        <option value="book">Book</option>
-    </select>
-    
-    
-    
-    <select id="year">
-        <option value="">Filter by Year</option>
-        <option value="2024">2024</option>
-        <option value="2023">2023</option>
-        <option value="2022">2022</option>
-        <option value="2021">2021</option>
-
-    </select>
-
-    <select id="weather">
-        <option value="">Filter by Weather</option>
-        <option value="cloudy">Cloudy</option>
-        <option value="fall">Fall</option>
-        <option value="fog">Fog</option>
-        <option value="rainy">Rainy</option>
-        <option value="snow">Snow</option>
-        <option value="spring">Spring</option>
-        <option value="summer">Summer</option>
-        <option value="winter">Winter</option>
-    </select>
-
-    <select id="color">
-        <option value="">Filter by Color</option>
-        <option value="bluesky">Blue Sky</option>
-        <option value="candlelight">Candlelight</option>
-        <option value="coolcolors"> Cool Colors</option>
-        <option value="daylightdirectsun">Daylight Direct Sun</option>
-        <option value="earthtones">Earth Tones</option>
-        <option value="incandescent">Incandescent</option>
-        <option value="monochrome">Monochrome</option>
-        <option value="pastel">Pastel</option>
-        <option value="vibrant">Vibrant</option>
-        <option value="warm">Warm</option>
-    </select>
-
-    <button id="clearFilters">Clear Filters</button>
-</div>
-
-<div id="imageContainer" class="image-container"></div>
-
- 
-
+        </p>
+        <p>
+            This project explores the concept of content curation and collection through the overlapping of these diverse landscape images in a collage layout. The layout changes with each page refresh, creating an ever-evolving visual narrative of landscapes. This interactive approach not only tells the story of changing landscapes but also highlights the diverse ways in which landscapes are represented and perceived in our digital lives.
+        </p>
+    </div>
+    <div class="filter">
+        <select id="landscapeType">
+            <option value="">Filter by Landscape Type</option>
+            <option value="lake">Lake</option>
+            <option value="mountain">Mountain</option>
+            <option value="farm">Farm</option>
+            <option value="agriculture">Agriculture</option>
+            <option value="screenshot">Screenshot</option>
+            <option value="sea">Sea</option>
+            <option value="tropics">Tropics</option>
+            <option value="cityscape">Cityscape</option>
+            <option value="urban">Urban</option>
+            <option value="streetscenes">Street Scenes</option>
+            <option value="forest">Forest</option>
+            <option value="architectural">Architectural</option>
+            <option value="river">River</option>
+            <option value="coast">Coast</option>
+            <option value="book">Book</option>
+        </select>
+        <select id="year">
+            <option value="">Filter by Year</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+        </select>
+        <select id="weather">
+            <option value="">Filter by Weather</option>
+            <option value="cloudy">Cloudy</option>
+            <option value="fall">Fall</option>
+            <option value="fog">Fog</option>
+            <option value="rainy">Rainy</option>
+            <option value="snow">Snow</option>
+            <option value="spring">Spring</option>
+            <option value="summer">Summer</option>
+            <option value="winter">Winter</option>
+        </select>
+        <select id="color">
+            <option value="">Filter by Color</option>
+            <option value="bluesky">Blue Sky</option>
+            <option value="candlelight">Candlelight</option>
+            <option value="coolcolors">Cool Colors</option>
+            <option value="daylightdirectsun">Daylight Direct Sun</option>
+            <option value="earthtones">Earth Tones</option>
+            <option value="incandescent">Incandescent</option>
+            <option value="monochrome">Monochrome</option>
+            <option value="pastel">Pastel</option>
+            <option value="vibrant">Vibrant</option>
+            <option value="warm">Warm</option>
+        </select>
+        <button id="clearFilters">Clear Filters</button>
+    </div>
+    <div id="imageContainer" class="image-container"></div>
 </body>
 </html>
